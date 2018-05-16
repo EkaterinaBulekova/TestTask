@@ -15,6 +15,7 @@ Imports ListFileUIApp.FileHelpers
 Imports ListFileUIApp.Infrastructure
 Imports ListFileUIApp.Models
 Imports ListFileUIApp.SerializerHelpers
+Imports Microsoft.Office.Interop.Word
 Imports Ninject
 Imports Ninject.Modules
 
@@ -40,6 +41,16 @@ Namespace My
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()> _
         Protected Overrides Sub OnCreateMainForm()
             Me.MainForm = Global.ListFileUIApp.Form1
+        End Sub
+
+        Protected Overrides Sub OnRun()
+            WordCreator.App = New Application()
+            MyBase.OnRun()
+        End Sub
+
+        Protected Overrides Sub OnShutdown()
+            MyBase.OnShutdown()
+            WordCreator.App.Quit()
         End Sub
     End Class
 End Namespace

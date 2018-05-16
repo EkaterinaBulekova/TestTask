@@ -5,17 +5,18 @@ Imports ListFileUIApp.Loggers
 Namespace Models
     Public Class ViewModel
         Implements IViewModel
-        Private ReadOnly _fileHelper As IFileHelper(Of FileInfoModel)
+        Private ReadOnly _dataFileHelper As IDataFileHelper(Of FileInfoModel)
+        Private ReadOnly _userFileHelper As IUserFileHelper
         Private ReadOnly _htmlHelper As IHtmlHelper
         Private ReadOnly _files As List(Of FileInfoModel)
         Private ReadOnly _logger As ILogger
 
-        Public Sub New(fileHelper As IFileHelper(Of FileInfoModel), htmlHelper As IHtmlHelper, logger As ILogger)
-            _fileHelper = fileHelper
+        Public Sub New(fileHelper As IDataFileHelper(Of FileInfoModel), htmlHelper As IHtmlHelper, logger As ILogger, userFileHelper As IUserFileHelper)
+            _dataFileHelper = fileHelper
             _htmlHelper = htmlHelper
             _logger = logger
-            _files = New List(Of FileInfoModel)(_fileHelper.GetFileList().ToList())
-            _logger.Info("Create viewModel")
+            _userFileHelper = userFileHelper
+            _files = New List(Of FileInfoModel)(_dataFileHelper.GetFileList().ToList())
         End Sub
 
         Public ReadOnly Property HtmlListString() As String Implements IViewModel.HtmlListString
@@ -27,10 +28,10 @@ Namespace Models
             End Get
         End Property
 
-        Public Sub AddFiles(fileList As FileInfoModel) Implements IViewModel.AddFiles
+        Public Sub AddFiles(fileInfo As FileInfoModel) Implements IViewModel.AddFiles
             Try
-                _files.Add(fileList)
-                _fileHelper.SetFileList(_files.ToArray())
+                _files.Add(fileInfo)
+                _dataFileHelper.SetFileList(_files.ToArray())
             Catch ex As Exception
                 _logger.Error_(ex.Message, ex)
                 MessageBox.Show(Form1, ex.Message)
@@ -39,7 +40,7 @@ Namespace Models
 
         Public Sub OpenLink(filePath As String) Implements IViewModel.OpenLink
             Try
-                _fileHelper.OpenFile(filePath)
+                _userFileHelper.OpenFile(filePath)
             Catch ex As Exception
                 _logger.Error_(ex.Message, ex)
                 MessageBox.Show(Form1, ex.Message)
@@ -48,7 +49,7 @@ Namespace Models
 
         Public Sub ClearTemp() Implements IViewModel.ClearTemp
             Try
-                _fileHelper.ClearTempFile()
+                _userFileHelper.ClearTempFiles()
             Catch ex As Exception
                 _logger.Error_(ex.Message, ex)
                 MessageBox.Show(Form1, ex.Message)

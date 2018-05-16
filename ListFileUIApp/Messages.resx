@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ImpossibleClearTemp" xml:space="preserve">
+    <value>Impossible clear temp files.</value>
+    <comment>Impossible clear temp files.</comment>
+  </data>
   <data name="ImpossibleClearTempDirectory" xml:space="preserve">
     <value>Impossible clear temp files</value>
     <comment>Impossible clear temp files</comment>
@@ -129,7 +133,7 @@
     <value>Impossible to make changes in data file.</value>
     <comment>Impossible to make changes in data file.</comment>
   </data>
-  <data name="ImpossibleOpenDataFile" xml:space="preserve">
+  <data name="ImpossibleOpenData" xml:space="preserve">
     <value>Impossible open data file.</value>
     <comment>Impossible open data file.</comment>
   </data>

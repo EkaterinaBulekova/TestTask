@@ -2,6 +2,8 @@
 
 Namespace FileHelpers
     Public Interface IHtmlHelper
-        Function GetHtmlString(list As List(Of FileInfoModel)) As Object
+
+        Function GetHtmlString(list As List(Of FileInfoModel)) As String
+
     End Interface
 End Namespace

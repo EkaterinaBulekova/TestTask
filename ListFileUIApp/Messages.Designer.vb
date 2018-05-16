@@ -65,6 +65,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Impossible clear temp files..
+        '''</summary>
+        Friend Shared ReadOnly Property ImpossibleClearTemp() As String
+            Get
+                Return ResourceManager.GetString("ImpossibleClearTemp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Impossible clear temp files.
         '''</summary>
         Friend Shared ReadOnly Property ImpossibleClearTempDirectory() As String
@@ -94,9 +103,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Impossible open data file..
         '''</summary>
-        Friend Shared ReadOnly Property ImpossibleOpenDataFile() As String
+        Friend Shared ReadOnly Property ImpossibleOpenData() As String
             Get
-                Return ResourceManager.GetString("ImpossibleOpenDataFile", resourceCulture)
+                Return ResourceManager.GetString("ImpossibleOpenData", resourceCulture)
             End Get
         End Property
     End Class
