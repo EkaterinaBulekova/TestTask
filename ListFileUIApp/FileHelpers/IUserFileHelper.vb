@@ -3,9 +3,9 @@
 
         Sub ClearTempFiles()
 
-        Sub CreateHtmlFile(source As String, destination As String)
-
         Sub OpenFile(filePath As String)
+
+        Sub CreateFile(filePath As String)
 
     End Interface
 End Namespace

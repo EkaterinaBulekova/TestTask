@@ -65,16 +65,34 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Impossible clear temp files..
+        '''  Looks up a localized string similar to The file already exists in list.
         '''</summary>
-        Friend Shared ReadOnly Property ImpossibleClearTemp() As String
+        Friend Shared ReadOnly Property FileAlreadyExists() As String
             Get
-                Return ResourceManager.GetString("ImpossibleClearTemp", resourceCulture)
+                Return ResourceManager.GetString("FileAlreadyExists", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Impossible clear temp files.
+        '''  Looks up a localized string similar to Impossble delete redudant file .
+        '''</summary>
+        Friend Shared ReadOnly Property ImpossbleDeleteFile() As String
+            Get
+                Return ResourceManager.GetString("ImpossbleDeleteFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Impossble start process for  .
+        '''</summary>
+        Friend Shared ReadOnly Property ImpossbleStartProcess() As String
+            Get
+                Return ResourceManager.GetString("ImpossbleStartProcess", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Impossible clear temp files .
         '''</summary>
         Friend Shared ReadOnly Property ImpossibleClearTempDirectory() As String
             Get
@@ -83,16 +101,34 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Impossible to convert file..
+        '''  Looks up a localized string similar to Impossible to convert text file .
         '''</summary>
-        Friend Shared ReadOnly Property ImpossibleConvertFile() As String
+        Friend Shared ReadOnly Property ImpossibleConvertTxtFile() As String
             Get
-                Return ResourceManager.GetString("ImpossibleConvertFile", resourceCulture)
+                Return ResourceManager.GetString("ImpossibleConvertTxtFile", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Impossible to make changes in data file..
+        '''  Looks up a localized string similar to Impossible to convert word file .
+        '''</summary>
+        Friend Shared ReadOnly Property ImpossibleConvertWordFile() As String
+            Get
+                Return ResourceManager.GetString("ImpossibleConvertWordFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Impossible create temp directory .
+        '''</summary>
+        Friend Shared ReadOnly Property ImpossibleCreateTempDirectory() As String
+            Get
+                Return ResourceManager.GetString("ImpossibleCreateTempDirectory", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Impossible to make changes in data file .
         '''</summary>
         Friend Shared ReadOnly Property ImpossibleMakeChanges() As String
             Get
@@ -101,11 +137,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Impossible open data file..
+        '''  Looks up a localized string similar to Impossible open data file .
         '''</summary>
         Friend Shared ReadOnly Property ImpossibleOpenData() As String
             Get
                 Return ResourceManager.GetString("ImpossibleOpenData", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Uncorrect file extention .
+        '''</summary>
+        Friend Shared ReadOnly Property UncorrectFileExtention() As String
+            Get
+                Return ResourceManager.GetString("UncorrectFileExtention", resourceCulture)
             End Get
         End Property
     End Class

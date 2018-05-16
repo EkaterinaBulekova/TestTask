@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports ListFileUIApp.FileHelpers
 Imports ListFileUIApp.Loggers
+Imports ListFileUIApp.My.Resources
 
 Namespace Models
     Public Class ViewModel
@@ -30,8 +31,13 @@ Namespace Models
 
         Public Sub AddFiles(fileInfo As FileInfoModel) Implements IViewModel.AddFiles
             Try
-                _files.Add(fileInfo)
-                _dataFileHelper.SetFileList(_files.ToArray())
+                If Not _files.Any(Function(x) x.FullName = fileInfo.FullName) Then
+                    _files.Add(fileInfo)
+                    _dataFileHelper.SetFileList(_files.ToArray())
+                    _userFileHelper.CreateFile(fileInfo.FullName)
+                Else
+                    MessageBox.Show(Form1, Messages.FileAlreadyExists)
+                End If
             Catch ex As Exception
                 _logger.Error_(ex.Message, ex)
                 MessageBox.Show(Form1, ex.Message)

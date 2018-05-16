@@ -117,24 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ImpossibleClearTemp" xml:space="preserve">
-    <value>Impossible clear temp files.</value>
-    <comment>Impossible clear temp files.</comment>
+  <data name="FileAlreadyExists" xml:space="preserve">
+    <value>The file already exists in list</value>
+    <comment>File already exists in list</comment>
+  </data>
+  <data name="ImpossbleDeleteFile" xml:space="preserve">
+    <value>Impossble delete redudant file </value>
+    <comment>Impossble delete redudant file</comment>
+  </data>
+  <data name="ImpossbleStartProcess" xml:space="preserve">
+    <value>Impossble start process for  </value>
+    <comment>ImpossbleStartProcess</comment>
   </data>
   <data name="ImpossibleClearTempDirectory" xml:space="preserve">
-    <value>Impossible clear temp files</value>
+    <value>Impossible clear temp files </value>
     <comment>Impossible clear temp files</comment>
   </data>
-  <data name="ImpossibleConvertFile" xml:space="preserve">
-    <value>Impossible to convert file.</value>
-    <comment>Impossible to convert file.</comment>
+  <data name="ImpossibleConvertTxtFile" xml:space="preserve">
+    <value>Impossible to convert text file </value>
+    <comment>Impossible to convert text file.</comment>
+  </data>
+  <data name="ImpossibleConvertWordFile" xml:space="preserve">
+    <value>Impossible to convert word file </value>
+    <comment>Impossible to convert word file.</comment>
+  </data>
+  <data name="ImpossibleCreateTempDirectory" xml:space="preserve">
+    <value>Impossible create temp directory </value>
+    <comment>Impossible create temp directory</comment>
   </data>
   <data name="ImpossibleMakeChanges" xml:space="preserve">
-    <value>Impossible to make changes in data file.</value>
+    <value>Impossible to make changes in data file </value>
     <comment>Impossible to make changes in data file.</comment>
   </data>
   <data name="ImpossibleOpenData" xml:space="preserve">
-    <value>Impossible open data file.</value>
+    <value>Impossible open data file </value>
     <comment>Impossible open data file.</comment>
+  </data>
+  <data name="UncorrectFileExtention" xml:space="preserve">
+    <value>Uncorrect file extention </value>
+    <comment>Uncorrect file extention</comment>
   </data>
 </root>
