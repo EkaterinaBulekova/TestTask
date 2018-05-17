@@ -102,25 +102,50 @@ Namespace FileHelpers
             End Using
         End Sub
 
+        '' old method
+        'Private Sub WordToHtmlProcess1(source As String, destination As String)
+        '    Dim documentFormat As Object = 10
+        '    Try
+        '        WordCreator.App.Documents.Open(source)
+        '        WordCreator.App.Visible = False
+        '    Catch ex As Exception
+        '        'if word application was dropped outside our application
+        '    Finally
+        '        WordCreator.App = New Application()
+        '        WordCreator.App.Documents.Open(source)
+        '        WordCreator.App.Visible = False
+        '    End Try
+        '    Dim document = WordCreator.App.ActiveDocument
+        '    Try
+        '        document.SaveAs(destination, documentFormat)
+        '    Catch ex As Exception
+        '        Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
+        '    Finally
+        '        document.Close()
+        '    End Try
+
+        'End Sub
+
         Private Sub WordToHtmlProcess(source As String, destination As String)
             Dim documentFormat As Object = 10
+            Dim app = New Application()
             Try
-                WordCreator.App.Documents.Open(source)
-                WordCreator.App.Visible = False
-            Catch ex As Exception
-                'if word application was dropped outside our application
-            Finally
-                WordCreator.App = New Application()
-                WordCreator.App.Documents.Open(source)
-                WordCreator.App.Visible = False
-            End Try
-            Dim document = WordCreator.App.ActiveDocument
-            Try
-                document.SaveAs(destination, documentFormat)
+                app.Documents.Open(source)
+                app.Visible = False
+                
+                Dim document = app.ActiveDocument
+                Try
+                    document.SaveAs(destination, documentFormat)
+                Catch ex As Exception
+                    Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
+                Finally
+                    document.Close()
+                End Try
+
             Catch ex As Exception
                 Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
             Finally
-                document.Close()
+                app.Quit()
             End Try
 
         End Sub

@@ -43,14 +43,21 @@ Namespace My
             Me.MainForm = Global.ListFileUIApp.Form1
         End Sub
 
-        Protected Overrides Sub OnRun()
-            WordCreator.App = New Application()
-            MyBase.OnRun()
-        End Sub
+        'Protected Overrides Sub OnRun()
+        '    MyBase.OnRun()
+        '    Try
+        '        WordCreator.App = New Application()
+        '    Catch ex As Exception
+        '    End Try
+        'End Sub
 
-        Protected Overrides Sub OnShutdown()
-            MyBase.OnShutdown()
-            WordCreator.App.Quit()
-        End Sub
+        'Protected Overrides Sub OnShutdown()
+        '    MyBase.OnShutdown()
+        '    Try
+        '        WordCreator.App.Quit()
+        '    Catch ex As Exception
+        '        ' if word application droped outside
+        '    End Try
+        'End Sub
     End Class
 End Namespace
