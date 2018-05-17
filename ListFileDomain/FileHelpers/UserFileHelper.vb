@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Imports ListFileUIApp.My.Resources
+Imports ListFileDomain.My.Resources
 Imports Microsoft.Office.Interop.Word
 
 Namespace FileHelpers
@@ -9,10 +9,10 @@ Namespace FileHelpers
         Private Const HtmlFileStart = "<!DOCTYPE html><meta http-equiv='Content-Typ' content='text/html; charset=utf-8'><html><body><pre>"
         Private Const HtmlFileEnd = "</pre></body></html>"
         Private Const HtmlExtention = "html"
-        Private ReadOnly _tempPath = Path.Combine(Path.GetDirectoryName(GetType(Form1).Assembly.Location), "Temp")
+        Public Property TempPath As String = "Temp" Implements IUserFileHelper.TempPath 
 
         Public Sub OpenFile(filePath As String) Implements IUserFileHelper.OpenFile
-            Dim htmlFilePath = GetDestanationPath(filePath) 
+            Dim htmlFilePath = GetDestanationPath(filePath)
 
             If Not String.IsNullOrEmpty(htmlFilePath) Then
                 Try
@@ -37,20 +37,21 @@ Namespace FileHelpers
         End Sub
 
         Public Sub CreateFile(filePath As String) Implements IUserFileHelper.CreateFile
-            Dim htmlFilePath = GetDestanationPath(filePath) 
+            Dim htmlFilePath = GetDestanationPath(filePath)
 
             If Not String.IsNullOrEmpty(htmlFilePath) Then
                 CreateHtmlFile(filePath, htmlFilePath)
             End If
         End Sub
-        
+
+
         Public Sub ClearTempFiles() Implements IUserFileHelper.ClearTempFiles
             Try
-                If Directory.Exists(_tempPath) Then
-                    Directory.Delete(_tempPath, True)
+                If Directory.Exists(TempPath) Then
+                    Directory.Delete(TempPath, True)
                 End If
             Catch ex As ArgumentException
-                Throw New Exception(Messages.ImpossibleClearTempDirectory + _tempPath, ex)
+                Throw New Exception(Messages.ImpossibleClearTempDirectory + TempPath, ex)
             End Try
         End Sub
 
@@ -58,18 +59,18 @@ Namespace FileHelpers
             Try
                 If File.Exists(source) Then
                     Dim htmlFilePath = Path.ChangeExtension(source, HtmlExtention)
-                    Return Path.Combine(_tempPath, Path.GetFileName(htmlFilePath))
+                    Return Path.Combine(TempPath, Path.GetFileName(htmlFilePath))
                 End If
             Catch ex As Exception
 
             End Try
             Return String.Empty
         End Function
-            
+
         Private Sub CreateHtmlFile(source As String, destination As String)
             Try
-                If Not Directory.Exists(_tempPath) Then
-                    Directory.CreateDirectory(_tempPath)
+                If Not Directory.Exists(TempPath) Then
+                    Directory.CreateDirectory(TempPath)
                 End If
             Catch ex As Exception
                 Throw New Exception(Messages.ImpossibleCreateTempDirectory, ex)
@@ -83,9 +84,9 @@ Namespace FileHelpers
                 Catch ex As Exception
                     Throw New Exception(Messages.ImpossibleConvertTxtFile + source, ex)
                 End Try
-            ElseIf  Not String.IsNullOrEmpty(extention) AndAlso (String.Equals(extention, ".docx") Or String.Equals(extention, ".doc")) Then
+            ElseIf Not String.IsNullOrEmpty(extention) AndAlso (String.Equals(extention, ".docx") Or String.Equals(extention, ".doc")) Then
                 WordToHtmlProcess(source, destination)
-            Else 
+            Else
                 Throw New Exception(Messages.UncorrectFileExtention + source)
             End If
         End Sub
@@ -102,53 +103,51 @@ Namespace FileHelpers
             End Using
         End Sub
 
-        '' old method
-        'Private Sub WordToHtmlProcess1(source As String, destination As String)
-        '    Dim documentFormat As Object = 10
-        '    Try
-        '        WordCreator.App.Documents.Open(source)
-        '        WordCreator.App.Visible = False
-        '    Catch ex As Exception
-        '        'if word application was dropped outside our application
-        '    Finally
-        '        WordCreator.App = New Application()
-        '        WordCreator.App.Documents.Open(source)
-        '        WordCreator.App.Visible = False
-        '    End Try
-        '    Dim document = WordCreator.App.ActiveDocument
-        '    Try
-        '        document.SaveAs(destination, documentFormat)
-        '    Catch ex As Exception
-        '        Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
-        '    Finally
-        '        document.Close()
-        '    End Try
-
-        'End Sub
-
+        ' old method
         Private Sub WordToHtmlProcess(source As String, destination As String)
             Dim documentFormat As Object = 10
-            Dim app = New Application()
             Try
-                app.Documents.Open(source)
-                app.Visible = False
-                
-                Dim document = app.ActiveDocument
-                Try
-                    document.SaveAs(destination, documentFormat)
-                Catch ex As Exception
-                    Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
-                Finally
-                    document.Close()
-                End Try
-
+                WordCreator.App.Documents.Open(source)
+            Catch ex As Exception
+                'if word application was dropped outside our application
+                WordCreator.App = New Application()
+                WordCreator.App.Documents.Open(source)
+            End Try
+                WordCreator.App.Visible = False
+            Dim document = WordCreator.App.ActiveDocument
+            Try
+                document.SaveAs(destination, documentFormat)
             Catch ex As Exception
                 Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
             Finally
-                app.Quit()
+                document.Close()
             End Try
 
         End Sub
+
+        'Private Sub WordToHtmlProcess(source As String, destination As String)
+        '    Dim documentFormat As Object = 10
+        '    Dim app = New Application()
+        '    Try
+        '        app.Documents.Open(source)
+        '        app.Visible = False
+
+        '        Dim document = app.ActiveDocument
+        '        Try
+        '            document.SaveAs(destination, documentFormat)
+        '        Catch ex As Exception
+        '            Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
+        '        Finally
+        '            document.Close()
+        '        End Try
+
+        '    Catch ex As Exception
+        '        Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
+        '    Finally
+        '        app.Quit()
+        '    End Try
+
+        'End Sub
 
     End Class
 End Namespace

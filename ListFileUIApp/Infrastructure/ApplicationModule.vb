@@ -1,7 +1,5 @@
-﻿Imports ListFileUIApp.FileHelpers
-Imports ListFileUIApp.Loggers
+﻿Imports ListFileUIApp.Loggers
 Imports ListFileUIApp.Models
-Imports ListFileUIApp.SerializerHelpers
 Imports log4net
 
 Namespace Infrastructure
@@ -9,10 +7,6 @@ Namespace Infrastructure
         Inherits Ninject.Modules.NinjectModule
 
         Public Overrides Sub Load()
-            Bind(GetType(IHtmlHelper)).To(GetType(HtmlHelper))
-            Bind(GetType(ISerialiser(Of FileInfoModel()))).To(GetType(XmlStreamSerializer(Of FileInfoModel())))
-            Bind(GetType(IDataFileHelper(Of FileInfoModel))).To(GetType(DataFileHelper(Of FileInfoModel)))
-            Bind(GetType(IUserFileHelper)).To(GetType(UserFileHelper))
             Bind(GetType(IViewModel)).To(GetType(ViewModel))
             Bind(GetType(ILog)).ToMethod(Function(context) LogManager.GetLogger(context.Request.Target?.Member.ReflectedType))
             Bind(GetType(ILogger)).To(GetType(Logger))

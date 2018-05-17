@@ -1,5 +1,6 @@
 ﻿Namespace FileHelpers
     Public Interface IUserFileHelper
+        Property TempPath As String
 
         Sub ClearTempFiles()
 

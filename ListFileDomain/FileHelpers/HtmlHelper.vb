@@ -1,5 +1,5 @@
 ﻿Imports System.Text
-Imports ListFileUIApp.Models
+Imports ListFileDomain.Models
 
 Namespace FileHelpers
     Public Class HtmlHelper
@@ -20,4 +20,4 @@ Namespace FileHelpers
         End Function
 
     End Class
-End NameSpace
+End Namespace

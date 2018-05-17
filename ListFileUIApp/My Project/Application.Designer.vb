@@ -10,14 +10,11 @@ Option Explicit On
 ' </auto-generated>
 '------------------------------------------------------------------------------
 
-Imports System.Xml.Serialization
-Imports ListFileUIApp.FileHelpers
 Imports ListFileUIApp.Infrastructure
-Imports ListFileUIApp.Models
-Imports ListFileUIApp.SerializerHelpers
-Imports Microsoft.Office.Interop.Word
-Imports Ninject
+Imports ListFileDomain.Infrastructure
 Imports Ninject.Modules
+Imports ListFileDomain.FileHelpers
+Imports Microsoft.Office.Interop.Word
 
 Namespace My
 
@@ -35,7 +32,7 @@ Namespace My
             Me.EnableVisualStyles = True
             Me.SaveMySettingsOnExit = True
             Me.ShutdownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
-            CompositionRoot.Wire(new ApplicationModule())
+            CompositionRoot.Wire(New INinjectModule() {New ApplicationModule(), New DomainModule()})
         End Sub
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()> _
@@ -43,21 +40,21 @@ Namespace My
             Me.MainForm = Global.ListFileUIApp.Form1
         End Sub
 
-        'Protected Overrides Sub OnRun()
-        '    MyBase.OnRun()
-        '    Try
-        '        WordCreator.App = New Application()
-        '    Catch ex As Exception
-        '    End Try
-        'End Sub
+        Protected Overrides Sub OnRun()
+            Try
+                WordCreator.App = New Application()
+            Catch ex As Exception
+            End Try
+            MyBase.OnRun()
+        End Sub
 
-        'Protected Overrides Sub OnShutdown()
-        '    MyBase.OnShutdown()
-        '    Try
-        '        WordCreator.App.Quit()
-        '    Catch ex As Exception
-        '        ' if word application droped outside
-        '    End Try
-        'End Sub
+        Protected Overrides Sub OnShutdown()
+            MyBase.OnShutdown()
+            Try
+                WordCreator.App.Quit()
+            Catch ex As Exception
+                ' if word application droped outside
+            End Try
+        End Sub
     End Class
 End Namespace

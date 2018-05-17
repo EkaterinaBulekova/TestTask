@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports ListFileUIApp.My.Resources
-Imports ListFileUIApp.SerializerHelpers
+Imports ListFileDomain.My.Resources
+Imports ListFileDomain.SerializerHelpers
 
 Namespace FileHelpers
     Public Class DataFileHelper(Of T)

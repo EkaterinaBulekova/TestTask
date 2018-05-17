@@ -1,4 +1,4 @@
-﻿Imports ListFileUIApp.Models
+﻿Imports ListFileDomain.Models
 
 Namespace FileHelpers
     Public Interface IHtmlHelper
