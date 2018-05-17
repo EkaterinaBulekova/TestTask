@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports ListFileUIApp.My.Resources
+Imports Microsoft.Office.Interop.Word
 
 Namespace FileHelpers
     Public Class UserFileHelper
@@ -103,9 +104,16 @@ Namespace FileHelpers
 
         Private Sub WordToHtmlProcess(source As String, destination As String)
             Dim documentFormat As Object = 10
-
-            WordCreator.App.Documents.Open(source)
-            WordCreator.App.Visible = False
+            Try
+                WordCreator.App.Documents.Open(source)
+                WordCreator.App.Visible = False
+            Catch ex As Exception
+                'if word application was dropped outside our application
+            Finally
+                WordCreator.App = New Application()
+                WordCreator.App.Documents.Open(source)
+                WordCreator.App.Visible = False
+            End Try
             Dim document = WordCreator.App.ActiveDocument
             Try
                 document.SaveAs(destination, documentFormat)
