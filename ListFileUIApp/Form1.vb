@@ -6,7 +6,6 @@ Imports ListFileUIApp.Models
 
 Public Class Form1
     Private _viewModel As IViewModel
-'    Private ReadOnly _dataAttribute = "data"
     Private ReadOnly _filterString = $"Documents|*.doc;*.docx;*.txt"
     Private _addedFile As FileInfoModel
 
@@ -14,24 +13,7 @@ Public Class Form1
         _viewModel = CompositionRoot.Resolve(Of IViewModel)
         FileListBox.DataSource = _viewModel.Files
         FileListBox.DisplayMember = "Name"
-'        FileListBrowser.DocumentText = _viewModel.HtmlListString
       End Sub
-
-    'Private Sub FileListBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) 
-    '    If FileListBrowser.ReadyState = WebBrowserReadyState.Complete Then
-    '        Dim links = FileListBrowser.Document.Links
-    '        For Each link As HtmlElement In links
-    '            AddHandler link.Click, AddressOf OnLinkclick
-    '        Next
-    '    End If
-    'End Sub
-
-    'Private Sub OnLinkclick(sender As Object, e As HtmlElementEventArgs)
-    '    Dim htmlElement = TryCast(sender, HtmlElement)
-    '    If Not htmlElement Is Nothing Then
-    '        _viewModel.OpenLink(htmlElement.GetAttribute(_dataAttribute))
-    '    End If
-    'End Sub
 
     Private Sub AddDocumentButton_Click(sender As Object, e As EventArgs) Handles AddDocumentButton.Click
         Dim dialog = New OpenFileDialog With {
@@ -49,7 +31,6 @@ Public Class Form1
             _viewModel.AddFiles(_addedFile)
         End If
         _addedFile = Nothing
-'            FileListBrowser.DocumentText = _viewModel.HtmlListString
     End Sub
 
     Private Sub AddFileChoosed(sender As Object, e As CancelEventArgs)

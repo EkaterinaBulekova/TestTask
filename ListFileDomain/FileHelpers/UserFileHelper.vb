@@ -103,7 +103,6 @@ Namespace FileHelpers
             End Using
         End Sub
 
-        ' old method
         Private Sub WordToHtmlProcess(source As String, destination As String)
             Dim documentFormat As Object = 10
             Try
@@ -124,30 +123,6 @@ Namespace FileHelpers
             End Try
 
         End Sub
-
-        'Private Sub WordToHtmlProcess(source As String, destination As String)
-        '    Dim documentFormat As Object = 10
-        '    Dim app = New Application()
-        '    Try
-        '        app.Documents.Open(source)
-        '        app.Visible = False
-
-        '        Dim document = app.ActiveDocument
-        '        Try
-        '            document.SaveAs(destination, documentFormat)
-        '        Catch ex As Exception
-        '            Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
-        '        Finally
-        '            document.Close()
-        '        End Try
-
-        '    Catch ex As Exception
-        '        Throw New Exception(Messages.ImpossibleConvertWordFile + source, ex)
-        '    Finally
-        '        app.Quit()
-        '    End Try
-
-        'End Sub
 
     End Class
 End Namespace
